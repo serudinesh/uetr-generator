@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UETR Generator</title>
+</head>
+<body>
+    <h1>UETR Generator</h1>
+    <button id="generate-btn">Generate UETR</button>
+    <p id="uetr-output"></p>
+
+    <script>
+        function generateUETR() {
+            const timestamp = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+            const randomPart = () => Math.random().toString(36).substr(2, 4).toUpperCase();
+            const uetr = `${timestamp}-${randomPart()}-${randomPart()}-${randomPart()}-${randomPart()}${randomPart()}`;
+            return uetr;
+        }
+
+        document.getElementById("generate-btn").addEventListener("click", () => {
+            const uetr = generateUETR();
+            document.getElementById("uetr-output").textContent = uetr;
+        });
+    </script>
+</body>
+</html>
