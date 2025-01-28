@@ -8,6 +8,7 @@
 <body>
     <h1>UETR Generator</h1>
     <button id="generate-btn">Generate UETR</button>
+    <button id="copy-btn" disabled>Copy UETR</button>
     <p id="uetr-output"></p>
 
     <script>
@@ -18,9 +19,23 @@
             return uetr;
         }
 
+        // Generate UETR and display it
         document.getElementById("generate-btn").addEventListener("click", () => {
             const uetr = generateUETR();
             document.getElementById("uetr-output").textContent = uetr;
+            document.getElementById("copy-btn").disabled = false; // Enable the copy button
+        });
+
+        // Copy UETR to clipboard
+        document.getElementById("copy-btn").addEventListener("click", () => {
+            const uetr = document.getElementById("uetr-output").textContent;
+            navigator.clipboard.writeText(uetr)
+                .then(() => {
+                    alert("UETR copied to clipboard!");
+                })
+                .catch(() => {
+                    alert("Failed to copy UETR. Please try again.");
+                });
         });
     </script>
 </body>
